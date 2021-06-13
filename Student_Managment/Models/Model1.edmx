@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="UserDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="city">
+          <Key>
+            <PropertyRef Name="cityid" />
+          </Key>
+          <Property Name="cityid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cityname" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="stateid" Type="int" />
+        </EntityType>
+        <EntityType Name="country">
+          <Key>
+            <PropertyRef Name="countryid" />
+          </Key>
+          <Property Name="countryid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="countryname" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="state">
+          <Key>
+            <PropertyRef Name="stateid" />
+          </Key>
+          <Property Name="stateid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="statename" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="countryid" Type="int" />
+        </EntityType>
+        <EntityType Name="userregistration">
+          <Key>
+            <PropertyRef Name="registrationid" />
+          </Key>
+          <Property Name="registrationid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="middlename" Type="varchar" MaxLength="20" />
+          <Property Name="lastname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="gender" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="dob" Type="date" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="5" />
+          <Property Name="password" Type="varchar" MaxLength="10" />
+          <Property Name="country" Type="int" />
+          <Property Name="state" Type="int" />
+          <Property Name="city" Type="int" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="phoneno" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__city__stateid__2C3393D0">
+          <End Role="state" Type="Self.state" Multiplicity="0..1" />
+          <End Role="city" Type="Self.city" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="state">
+              <PropertyRef Name="stateid" />
+            </Principal>
+            <Dependent Role="city">
+              <PropertyRef Name="stateid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__state__countryid__267ABA7A">
+          <End Role="country" Type="Self.country" Multiplicity="0..1" />
+          <End Role="state" Type="Self.state" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="state">
+              <PropertyRef Name="countryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userregis__count__36B12243">
+          <End Role="country" Type="Self.country" Multiplicity="0..1" />
+          <End Role="userregistration" Type="Self.userregistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="userregistration">
+              <PropertyRef Name="country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userregis__state__37A5467C">
+          <End Role="state" Type="Self.state" Multiplicity="0..1" />
+          <End Role="userregistration" Type="Self.userregistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="state">
+              <PropertyRef Name="stateid" />
+            </Principal>
+            <Dependent Role="userregistration">
+              <PropertyRef Name="state" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userregist__city__38996AB5">
+          <End Role="city" Type="Self.city" Multiplicity="0..1" />
+          <End Role="userregistration" Type="Self.userregistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="city">
+              <PropertyRef Name="cityid" />
+            </Principal>
+            <Dependent Role="userregistration">
+              <PropertyRef Name="city" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UserDBModelStoreContainer">
+          <EntitySet Name="city" EntityType="Self.city" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="country" EntityType="Self.country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="state" EntityType="Self.state" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userregistration" EntityType="Self.userregistration" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__city__stateid__2C3393D0" Association="Self.FK__city__stateid__2C3393D0">
+            <End Role="state" EntitySet="state" />
+            <End Role="city" EntitySet="city" />
+          </AssociationSet>
+          <AssociationSet Name="FK__state__countryid__267ABA7A" Association="Self.FK__state__countryid__267ABA7A">
+            <End Role="country" EntitySet="country" />
+            <End Role="state" EntitySet="state" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userregis__count__36B12243" Association="Self.FK__userregis__count__36B12243">
+            <End Role="country" EntitySet="country" />
+            <End Role="userregistration" EntitySet="userregistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userregis__state__37A5467C" Association="Self.FK__userregis__state__37A5467C">
+            <End Role="state" EntitySet="state" />
+            <End Role="userregistration" EntitySet="userregistration" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userregist__city__38996AB5" Association="Self.FK__userregist__city__38996AB5">
+            <End Role="city" EntitySet="city" />
+            <End Role="userregistration" EntitySet="userregistration" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UserDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="city">
+          <Key>
+            <PropertyRef Name="cityid" />
+          </Key>
+          <Property Name="cityid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cityname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="stateid" Type="Int32" />
+          <NavigationProperty Name="state" Relationship="Self.FK__city__stateid__2C3393D0" FromRole="city" ToRole="state" />
+          <NavigationProperty Name="userregistrations" Relationship="Self.FK__userregist__city__38996AB5" FromRole="city" ToRole="userregistration" />
+        </EntityType>
+        <EntityType Name="country">
+          <Key>
+            <PropertyRef Name="countryid" />
+          </Key>
+          <Property Name="countryid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="countryname" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="states" Relationship="Self.FK__state__countryid__267ABA7A" FromRole="country" ToRole="state" />
+          <NavigationProperty Name="userregistrations" Relationship="Self.FK__userregis__count__36B12243" FromRole="country" ToRole="userregistration" />
+        </EntityType>
+        <EntityType Name="state">
+          <Key>
+            <PropertyRef Name="stateid" />
+          </Key>
+          <Property Name="stateid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="statename" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="countryid" Type="Int32" />
+          <NavigationProperty Name="cities" Relationship="Self.FK__city__stateid__2C3393D0" FromRole="state" ToRole="city" />
+          <NavigationProperty Name="country" Relationship="Self.FK__state__countryid__267ABA7A" FromRole="state" ToRole="country" />
+          <NavigationProperty Name="userregistrations" Relationship="Self.FK__userregis__state__37A5467C" FromRole="state" ToRole="userregistration" />
+        </EntityType>
+        <EntityType Name="userregistration">
+          <Key>
+            <PropertyRef Name="registrationid" />
+          </Key>
+          <Property Name="registrationid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="middlename" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dob" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="login" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="country" Type="Int32" />
+          <Property Name="state" Type="Int32" />
+          <Property Name="city" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phoneno" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="city1" Relationship="Self.FK__userregist__city__38996AB5" FromRole="userregistration" ToRole="city" />
+          <NavigationProperty Name="country1" Relationship="Self.FK__userregis__count__36B12243" FromRole="userregistration" ToRole="country" />
+          <NavigationProperty Name="state1" Relationship="Self.FK__userregis__state__37A5467C" FromRole="userregistration" ToRole="state" />
+        </EntityType>
+        <Association Name="FK__city__stateid__2C3393D0">
+          <End Role="state" Type="Self.state" Multiplicity="0..1" />
+          <End Role="city" Type="Self.city" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="state">
+              <PropertyRef Name="stateid" />
+            </Principal>
+            <Dependent Role="city">
+              <PropertyRef Name="stateid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userregist__city__38996AB5">
+          <End Role="city" Type="Self.city" Multiplicity="0..1" />
+          <End Role="userregistration" Type="Self.userregistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="city">
+              <PropertyRef Name="cityid" />
+            </Principal>
+            <Dependent Role="userregistration">
+              <PropertyRef Name="city" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__state__countryid__267ABA7A">
+          <End Role="country" Type="Self.country" Multiplicity="0..1" />
+          <End Role="state" Type="Self.state" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="state">
+              <PropertyRef Name="countryid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userregis__count__36B12243">
+          <End Role="country" Type="Self.country" Multiplicity="0..1" />
+          <End Role="userregistration" Type="Self.userregistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="country">
+              <PropertyRef Name="countryid" />
+            </Principal>
+            <Dependent Role="userregistration">
+              <PropertyRef Name="country" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__userregis__state__37A5467C">
+          <End Role="state" Type="Self.state" Multiplicity="0..1" />
+          <End Role="userregistration" Type="Self.userregistration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="state">
+              <PropertyRef Name="stateid" />
+            </Principal>
+            <Dependent Role="userregistration">
+              <PropertyRef Name="state" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UserDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cities" EntityType="Self.city" />
+          <EntitySet Name="countries" EntityType="Self.country" />
+          <EntitySet Name="states" EntityType="Self.state" />
+          <EntitySet Name="userregistrations" EntityType="Self.userregistration" />
+          <AssociationSet Name="FK__city__stateid__2C3393D0" Association="Self.FK__city__stateid__2C3393D0">
+            <End Role="state" EntitySet="states" />
+            <End Role="city" EntitySet="cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userregist__city__38996AB5" Association="Self.FK__userregist__city__38996AB5">
+            <End Role="city" EntitySet="cities" />
+            <End Role="userregistration" EntitySet="userregistrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__state__countryid__267ABA7A" Association="Self.FK__state__countryid__267ABA7A">
+            <End Role="country" EntitySet="countries" />
+            <End Role="state" EntitySet="states" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userregis__count__36B12243" Association="Self.FK__userregis__count__36B12243">
+            <End Role="country" EntitySet="countries" />
+            <End Role="userregistration" EntitySet="userregistrations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__userregis__state__37A5467C" Association="Self.FK__userregis__state__37A5467C">
+            <End Role="state" EntitySet="states" />
+            <End Role="userregistration" EntitySet="userregistrations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UserDBModelStoreContainer" CdmEntityContainer="UserDBEntities">
+          <EntitySetMapping Name="cities">
+            <EntityTypeMapping TypeName="UserDBModel.city">
+              <MappingFragment StoreEntitySet="city">
+                <ScalarProperty Name="cityid" ColumnName="cityid" />
+                <ScalarProperty Name="cityname" ColumnName="cityname" />
+                <ScalarProperty Name="stateid" ColumnName="stateid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="countries">
+            <EntityTypeMapping TypeName="UserDBModel.country">
+              <MappingFragment StoreEntitySet="country">
+                <ScalarProperty Name="countryid" ColumnName="countryid" />
+                <ScalarProperty Name="countryname" ColumnName="countryname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="states">
+            <EntityTypeMapping TypeName="UserDBModel.state">
+              <MappingFragment StoreEntitySet="state">
+                <ScalarProperty Name="stateid" ColumnName="stateid" />
+                <ScalarProperty Name="statename" ColumnName="statename" />
+                <ScalarProperty Name="countryid" ColumnName="countryid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userregistrations">
+            <EntityTypeMapping TypeName="UserDBModel.userregistration">
+              <MappingFragment StoreEntitySet="userregistration">
+                <ScalarProperty Name="registrationid" ColumnName="registrationid" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="middlename" ColumnName="middlename" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phoneno" ColumnName="phoneno" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

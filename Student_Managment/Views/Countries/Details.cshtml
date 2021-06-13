@@ -1,0 +1,26 @@
+﻿@model Student_Managment.Models.country
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>country</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.countryname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.countryname)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.countryid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

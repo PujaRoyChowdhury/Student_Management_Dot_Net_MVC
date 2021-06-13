@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b68826b6f0044b459492ec9ab101de07" Name="Diagram1">
+        <EntityTypeShape EntityType="UserDBModel.city" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDBModel.country" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDBModel.state" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDBModel.userregistration" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="UserDBModel.FK__city__stateid__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDBModel.FK__userregist__city__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDBModel.FK__state__countryid__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDBModel.FK__userregis__count__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDBModel.FK__userregis__state__37A5467C" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

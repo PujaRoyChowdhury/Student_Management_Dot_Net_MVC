@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Student_Managment.Models.userregistration>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.middlename)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dob)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.phoneno)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.city1.cityname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.country1.countryname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.state1.statename)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.middlename)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dob)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phoneno)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.city1.cityname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.country1.countryname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.state1.statename)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.registrationid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.registrationid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.registrationid })
+        </td>
+    </tr>
+}
+
+</table>
